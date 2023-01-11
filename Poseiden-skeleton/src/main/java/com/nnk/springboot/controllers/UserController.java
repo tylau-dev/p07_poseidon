@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.nnk.springboot.domain.User;
 import com.nnk.springboot.services.IUserService;
 
+/*
+ * MVC Controller for User
+ */
 @Controller
 public class UserController {
     @Autowired

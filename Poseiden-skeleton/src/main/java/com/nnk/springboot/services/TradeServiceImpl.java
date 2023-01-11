@@ -9,7 +9,7 @@ import com.nnk.springboot.domain.Trade;
 import com.nnk.springboot.repositories.TradeRepository;
 
 /*
- * Service for handling User related operations
+ * Service for handling Trade CRUD operations
  */
 @Service
 public class TradeServiceImpl implements ITradeService {

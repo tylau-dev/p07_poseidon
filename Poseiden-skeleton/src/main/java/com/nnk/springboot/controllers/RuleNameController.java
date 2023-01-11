@@ -16,6 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.nnk.springboot.domain.RuleName;
 import com.nnk.springboot.services.IRuleNameService;
 
+/*
+ * MVC Controller for RuleName
+ */
 @Controller
 public class RuleNameController {
     private IRuleNameService ruleNameService;

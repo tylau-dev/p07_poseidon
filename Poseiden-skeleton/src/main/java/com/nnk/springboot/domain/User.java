@@ -19,8 +19,6 @@ public class User {
     private String password;
     @NotBlank(message = "FullName is mandatory")
     private String fullname;
-
-    // Créer le set au niveau d'UserDetailsImpl
     @NotBlank(message = "Role is mandatory")
     private String role;
 

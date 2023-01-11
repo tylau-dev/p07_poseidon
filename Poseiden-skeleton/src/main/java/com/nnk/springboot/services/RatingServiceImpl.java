@@ -9,7 +9,7 @@ import com.nnk.springboot.domain.Rating;
 import com.nnk.springboot.repositories.RatingRepository;
 
 /*
- * Service for handling User related operations
+ * Service for handling Rating CRUD operations
  */
 @Service
 public class RatingServiceImpl implements IRatingService {

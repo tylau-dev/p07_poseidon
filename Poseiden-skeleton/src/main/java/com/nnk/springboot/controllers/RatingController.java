@@ -16,6 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.nnk.springboot.domain.Rating;
 import com.nnk.springboot.services.IRatingService;
 
+/*
+ * MVC Controller for Rating
+ */
 @Controller
 public class RatingController {
     private IRatingService ratingService;

@@ -9,7 +9,7 @@ import com.nnk.springboot.domain.BidList;
 import com.nnk.springboot.repositories.BidListRepository;
 
 /*
- * Service for handling User related operations
+ * Service for handling User CRUD operations
  */
 @Service
 public class BidListPointServiceImpl implements IBidListService {

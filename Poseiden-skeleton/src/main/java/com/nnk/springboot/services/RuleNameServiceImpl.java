@@ -9,7 +9,7 @@ import com.nnk.springboot.domain.RuleName;
 import com.nnk.springboot.repositories.RuleNameRepository;
 
 /*
- * Service for handling User related operations
+ * Service for handling RuleName CRUD operations
  */
 @Service
 public class RuleNameServiceImpl implements IRuleNameService {

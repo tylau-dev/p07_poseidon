@@ -16,6 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.nnk.springboot.domain.Trade;
 import com.nnk.springboot.services.ITradeService;
 
+/*
+ * MVC Controller for Trade
+ */
 @Controller
 public class TradeController {
     private ITradeService tradeService;

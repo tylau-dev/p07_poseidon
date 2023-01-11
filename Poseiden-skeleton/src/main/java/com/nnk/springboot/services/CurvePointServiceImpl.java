@@ -9,7 +9,7 @@ import com.nnk.springboot.domain.CurvePoint;
 import com.nnk.springboot.repositories.CurvePointRepository;
 
 /*
- * Service for handling User related operations
+ * Service for handling User CRUD operations
  */
 @Service
 public class CurvePointServiceImpl implements ICurvePointService {

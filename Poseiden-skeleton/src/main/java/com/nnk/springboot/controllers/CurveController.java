@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.nnk.springboot.domain.CurvePoint;
 import com.nnk.springboot.services.ICurvePointService;
 
-//import javax.validation.Valid;
 
+/*
+ * MVC Controller for Curve
+ */
 @Controller
 public class CurveController {
     private ICurvePointService curvePointService;

@@ -8,6 +8,9 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+/*
+ * UserDetails Implementation for Role management on Spring Security
+ */
 public class UserDetailsImpl implements UserDetails {
     private User user;
 
