@@ -67,6 +67,17 @@ public class TradeServiceTest {
     }
 
     @Test
+    public void shouldUpdateTrade() {
+	// Saving in the repository works for both adding and updating
+
+	when(tradeRepository.save(any(Trade.class))).thenReturn(tradeToAdd);
+
+	Trade tradeUser = tradeService.saveTrade(tradeToAdd);
+
+	assertEquals(tradeUser.getTradeId(), tradeToAdd.getTradeId());
+    }
+
+    @Test
     public void shouldDeleteTrade() {
 	tradeService.deleteTradeById(tradeToAdd.getTradeId());
 

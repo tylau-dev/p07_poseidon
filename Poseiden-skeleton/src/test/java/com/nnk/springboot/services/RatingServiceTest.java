@@ -67,6 +67,17 @@ public class RatingServiceTest {
     }
 
     @Test
+    public void shouldUpdateRating() {
+	// Saving in the repository works for both adding and updating
+
+	when(ratingRepository.save(any(Rating.class))).thenReturn(ratingToAdd);
+
+	Rating ratingUser = ratingService.saveRating(ratingToAdd);
+
+	assertEquals(ratingUser.getRatingId(), ratingToAdd.getRatingId());
+    }
+
+    @Test
     public void shouldDeleteRating() {
 	ratingService.deleteRatingById(ratingToAdd.getRatingId());
 

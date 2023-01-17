@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,6 +21,7 @@ import com.nnk.springboot.services.IBidListService;
 @Controller
 public class BidListController {
     private IBidListService bidListService;
+    private static final Logger logger = LogManager.getLogger("BidListController");
 
     public BidListController(IBidListService bidListService) {
 	this.bidListService = bidListService;
@@ -26,6 +29,7 @@ public class BidListController {
 
     @RequestMapping("/bidList/list")
     public String home(Model model) {
+	logger.info("GET /bidList/list");
 
 	List<BidList> bidListResult = new ArrayList<BidList>();
 	this.bidListService.getBidLists().forEach(bidListResult::add);
@@ -36,12 +40,17 @@ public class BidListController {
 
     @GetMapping("/bidList/add")
     public String addBidForm(BidList bid) {
+	logger.info("GET /bidList/add");
+
 	return "bidList/add";
     }
 
     @PostMapping("/bidList/validate")
     public String validate(@Valid BidList bid, BindingResult result, Model model) {
+	logger.info("POST /bidList/validate");
+
 	if (result.hasErrors()) {
+	    logger.error("Error with form input");
 	    return "bidList/add";
 	}
 
@@ -61,7 +70,10 @@ public class BidListController {
 
     @PostMapping("/bidList/update/{id}")
     public String updateBid(@PathVariable("id") Integer id, @Valid BidList bidList, BindingResult result, Model model) {
+	logger.info("POST /bidList/update");
+
 	if (result.hasErrors()) {
+	    logger.error("Error with form input");
 	    return "bidList/update";
 	}
 
@@ -79,6 +91,8 @@ public class BidListController {
 
     @GetMapping("/bidList/delete/{id}")
     public String deleteBid(@PathVariable("id") Integer id, Model model) {
+	logger.info("POST /bidList/delete");
+
 	this.bidListService.deleteBidListById(id);
 
 	// Retrieve the BidList with updated values

@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,6 +20,8 @@ import com.nnk.springboot.services.IRuleNameService;
 
 @Controller
 public class RuleNameController {
+    private static final Logger logger = LogManager.getLogger("RuleNameController");
+
     private IRuleNameService ruleNameService;
 
     public RuleNameController(IRuleNameService ruleNameService) {
@@ -26,6 +30,8 @@ public class RuleNameController {
 
     @RequestMapping("/ruleName/list")
     public String home(Model model) {
+	logger.info("GET /ruleName/list");
+
 	List<RuleName> ruleNameListResult = new ArrayList<RuleName>();
 	this.ruleNameService.getRuleNames().forEach(ruleNameListResult::add);
 
@@ -35,12 +41,17 @@ public class RuleNameController {
 
     @GetMapping("/ruleName/add")
     public String addRuleForm(Model model, RuleName ruleName) {
+	logger.info("GET /ruleName/add");
+
 	return "ruleName/add";
     }
 
     @PostMapping("/ruleName/validate")
     public String validate(@Valid RuleName ruleName, BindingResult result, Model model) {
+	logger.info("POST /ruleName/validate");
+
 	if (result.hasErrors()) {
+	    logger.error("Error with form input");
 	    return "ruleName/add";
 	}
 	this.ruleNameService.saveRuleName(ruleName);
@@ -55,6 +66,8 @@ public class RuleNameController {
 
     @GetMapping("/ruleName/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
+	logger.info("GET /ruleName/update");
+
 	RuleName ruleNameResult = this.ruleNameService.getRuleNameById(id).get();
 
 	model.addAttribute("ruleName", ruleNameResult);
@@ -64,7 +77,10 @@ public class RuleNameController {
     @PostMapping("/ruleName/update/{id}")
     public String updateRuleName(@PathVariable("id") Integer id, @Valid RuleName ruleName, BindingResult result,
 	    Model model) {
+	logger.info("POST /ruleName/update");
+
 	if (result.hasErrors()) {
+	    logger.error("Error with form input");
 	    return "ruleName/update/{id}";
 	}
 	ruleName.setRuleNameId(id);
@@ -79,6 +95,8 @@ public class RuleNameController {
 
     @GetMapping("/ruleName/delete/{id}")
     public String deleteRuleName(@PathVariable("id") Integer id, Model model) {
+	logger.info("GET /ruleName/delete");
+
 	this.ruleNameService.deleteRuleNameById(id);
 
 	List<RuleName> ruleNameListResult = new ArrayList<RuleName>();

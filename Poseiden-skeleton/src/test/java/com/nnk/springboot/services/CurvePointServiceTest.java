@@ -67,6 +67,16 @@ public class CurvePointServiceTest {
     }
 
     @Test
+    public void shouldUpdateCurvePoint() {
+	// Saving in the repository works for both adding and updating
+	when(curvePointRepository.save(any(CurvePoint.class))).thenReturn(curvePointToAdd);
+
+	CurvePoint curvePointUser = curvePointService.saveCurvePoint(curvePointToAdd);
+
+	assertEquals(curvePointUser.getCurvePointId(), curvePointToAdd.getCurvePointId());
+    }
+
+    @Test
     public void shouldDeleteCurvePoint() {
 	curvePointService.deleteCurvePointById(curvePointToAdd.getCurvePointId());
 

@@ -67,6 +67,16 @@ public class UserServiceTest {
     }
 
     @Test
+    public void shouldUpdateUser() {
+	// Saving in the repository works for both adding and updating
+	when(userRepository.save(any(User.class))).thenReturn(userToAdd);
+
+	User userUser = userService.saveUser(userToAdd);
+
+	assertEquals(userUser.getId(), userToAdd.getId());
+    }
+
+    @Test
     public void shouldDeleteUser() {
 	userService.deleteUserById(userToAdd.getId());
 
