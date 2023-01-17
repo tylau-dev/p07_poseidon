@@ -67,6 +67,17 @@ public class RuleNameServiceTest {
     }
 
     @Test
+    public void shouldUpdateRuleName() {
+	// Saving in the repository works for both adding and updating
+
+	when(ruleNameRepository.save(any(RuleName.class))).thenReturn(ruleNameToAdd);
+
+	RuleName ruleNameUser = ruleNameService.saveRuleName(ruleNameToAdd);
+
+	assertEquals(ruleNameUser.getRuleNameId(), ruleNameToAdd.getRuleNameId());
+    }
+
+    @Test
     public void shouldDeleteRuleName() {
 	ruleNameService.deleteRuleNameById(ruleNameToAdd.getRuleNameId());
 

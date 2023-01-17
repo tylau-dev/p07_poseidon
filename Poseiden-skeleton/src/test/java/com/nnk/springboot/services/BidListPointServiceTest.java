@@ -67,6 +67,16 @@ public class BidListPointServiceTest {
     }
 
     @Test
+    public void shouldUpdateBidList() {
+	// Saving in the repository works for both adding and updating
+	when(bidListRepository.save(any(BidList.class))).thenReturn(bidListToAdd);
+
+	BidList bidListUser = bidListService.saveBidList(bidListToAdd);
+
+	assertEquals(bidListUser.getBidListId(), bidListToAdd.getBidListId());
+    }
+
+    @Test
     public void shouldDeleteBidList() {
 	bidListService.deleteBidListById(bidListToAdd.getBidListId());
 
