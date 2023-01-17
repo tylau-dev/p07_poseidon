@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,6 +20,9 @@ import com.nnk.springboot.services.IRatingService;
 
 @Controller
 public class RatingController {
+
+    private static final Logger logger = LogManager.getLogger("RatingController");
+
     private IRatingService ratingService;
 
     public RatingController(IRatingService ratingService) {
@@ -26,6 +31,8 @@ public class RatingController {
 
     @RequestMapping("/rating/list")
     public String home(Model model) {
+	logger.info("GET /rating/list");
+
 	List<Rating> ratingListResult = new ArrayList<Rating>();
 	this.ratingService.getRatings().forEach(ratingListResult::add);
 
@@ -35,12 +42,17 @@ public class RatingController {
 
     @GetMapping("/rating/add")
     public String addRatingForm(Rating rating) {
+	logger.info("GET /rating/add");
+
 	return "rating/add";
     }
 
     @PostMapping("/rating/validate")
     public String validate(@Valid Rating rating, BindingResult result, Model model) {
+	logger.info("POST /rating/validate");
+
 	if (result.hasErrors()) {
+	    logger.error("Error with form input");
 	    return "rating/add";
 	}
 	this.ratingService.saveRating(rating);
@@ -50,6 +62,8 @@ public class RatingController {
 
     @GetMapping("/rating/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
+	logger.info("GET /rating/update");
+
 	Rating ratingResult = this.ratingService.getRatingById(id).get();
 
 	model.addAttribute("rating", ratingResult);
@@ -59,7 +73,10 @@ public class RatingController {
     @PostMapping("/rating/update/{id}")
     public String updateRating(@PathVariable("id") Integer id, @Valid Rating rating, BindingResult result,
 	    Model model) {
+	logger.info("POST /rating/update");
+
 	if (result.hasErrors()) {
+	    logger.error("Error with form input");
 	    return "rating/update/{id}";
 	}
 	rating.setRatingId(id);
@@ -75,6 +92,8 @@ public class RatingController {
 
     @GetMapping("/rating/delete/{id}")
     public String deleteRating(@PathVariable("id") Integer id, Model model) {
+	logger.info("GET /rating/delete");
+
 	this.ratingService.deleteRatingById(id);
 
 	List<Rating> ratingListResult = new ArrayList<Rating>();
